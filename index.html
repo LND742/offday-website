@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1C1C1C">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<title>OFFDAY — Join the waitlist</title>
+<meta name="description" content="OFFDAY. Athletic recovery, starting with the cold plunge. Batch 001 is coming. Join the waitlist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;1,900&display=swap" rel="stylesheet">
+<style>
+  :root{--charcoal:#1C1C1C;--bone:#F4F2EE;--stone:#BDB8AF;--concrete:#6E6B66;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+  *,*::before,*::after{box-sizing:inherit}
+  html,body{height:100%;margin:0;background:var(--charcoal);color:var(--bone);font-family:'Archivo',Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+  /* Layer 1: overhead softbox glow */
+  .glow{position:fixed;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 38%, rgba(244,242,238,.13), transparent 70%),
+      radial-gradient(ellipse 120% 90% at 50% 120%, rgba(0,0,0,.55), transparent 60%)}
+
+  /* Layer 2: the tub, rising out of the dark, with steam */
+  .tub{position:fixed;left:50%;bottom:0;transform:translate(-50%,40%);width:min(125vw,900px,105vh);opacity:.85;pointer-events:none;
+    -webkit-mask:linear-gradient(to bottom,#000 55%,transparent 95%);mask:linear-gradient(to bottom,#000 55%,transparent 95%)}
+  .tub svg{display:block;width:100%;height:auto}
+
+  /* Layer 4: film grain */
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.09;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  main{position:relative;z-index:1;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:max(32px,env(safe-area-inset-top)) max(24px,env(safe-area-inset-right)) max(32px,env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left))}
+  .logo{font-weight:900;font-style:italic;font-size:clamp(56px,12vw,120px);letter-spacing:-0.03em;line-height:1;margin:0;
+    text-shadow:0 18px 50px rgba(0,0,0,.55)}
+  .tag{font-size:clamp(12px,1.6vw,15px);letter-spacing:.45em;margin:14px 0 0 .45em;color:var(--stone)}
+  p{font-size:18px;line-height:1.45;margin:36px 0 32px;max-width:30ch;color:var(--stone)}
+  form{width:100%;max-width:420px}
+  input,button{-webkit-appearance:none;appearance:none;border-radius:0;-webkit-tap-highlight-color:transparent;width:100%;font:inherit;font-size:17px;padding:16px;border:1.5px solid rgba(244,242,238,.85)}
+  input{background:rgba(28,28,28,.6);color:var(--bone)}
+  input::placeholder{color:var(--concrete)}
+  input:focus{outline:3px solid var(--concrete);outline-offset:2px}
+  button{margin-top:10px;background:var(--bone);color:var(--charcoal);border-color:var(--bone);font-weight:900;font-style:italic;cursor:pointer}
+  button:hover{background:#fff}
+  button:focus-visible{outline:3px solid var(--stone);outline-offset:2px}
+  .done{margin:0 auto 18px;color:var(--bone)}
+  .follow{display:block;width:100%;padding:16px;border:1.5px solid rgba(244,242,238,.85);color:var(--bone);text-decoration:none;font-weight:900;font-style:italic;font-size:17px;background:rgba(28,28,28,.6)}
+  .follow:hover{background:var(--bone);color:var(--charcoal)}
+  .follow:focus-visible{outline:3px solid var(--stone);outline-offset:2px}
+  .hp{position:absolute;left:-9999px}
+  .msg:empty{display:none}
+  .msg{min-height:1.4em;margin:14px 0 0;font-size:15px;color:var(--stone)}
+  form p{color:var(--bone)}
+  /* Small phones (iPhone SE) */
+  @media (max-width:380px){
+    p{font-size:16px;margin:28px 0 24px}
+  }
+  /* Phones in landscape: tighten so the form stays on screen, tub tucked lower */
+  @media (max-height:500px) and (orientation:landscape){
+    main{justify-content:flex-start;padding-top:max(20px,env(safe-area-inset-top))}
+    .logo{font-size:clamp(40px,8vh,64px)}
+    .tag{margin-top:8px;font-size:11px}
+    p{margin:14px 0 16px;font-size:15px}
+    p br{display:none}
+    form{max-width:380px}
+    input,button{padding:12px 14px;font-size:16px}
+    button{margin-top:8px}
+    .tub{transform:translate(-50%,62%);opacity:.6}
+  }
+  /* iPad and tablets (portrait and landscape): scale everything up */
+  @media (min-width:740px) and (min-height:700px){
+    .logo{font-size:clamp(110px,15vw,170px)}
+    .tag{font-size:17px;margin-top:20px}
+    p{font-size:21px;margin:44px 0 36px}
+    form{max-width:480px}
+    input,button,.follow{font-size:19px;padding:20px}
+    button{margin-top:12px}
+  }
+  /* Large desktops */
+  @media (min-width:1400px) and (min-height:900px){
+    .logo{font-size:180px}
+  }
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<div class="tub" aria-hidden="true">
+<svg viewBox="0 -520 1000 1420" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="body" x1="0" x2="1">
+      <stop offset="0" stop-color="#1C1C1C"/><stop offset=".3" stop-color="#55524d"/><stop offset=".45" stop-color="#6b6862"/><stop offset=".75" stop-color="#3a3835"/><stop offset="1" stop-color="#1C1C1C"/>
+    </linearGradient>
+    <pattern id="ribs" width="12" height="10" patternUnits="userSpaceOnUse">
+      <rect width="12" height="10" fill="transparent"/><rect width="5" height="10" fill="#000" opacity=".28"/>
+    </pattern>
+    <linearGradient id="rim" x1="0" x2="1">
+      <stop offset="0" stop-color="#2a2927"/><stop offset=".35" stop-color="#8f8b84"/><stop offset=".5" stop-color="#a39f97"/><stop offset=".8" stop-color="#4a4844"/><stop offset="1" stop-color="#2a2927"/>
+    </linearGradient>
+    <radialGradient id="water" cx=".45" cy=".4" r=".7">
+      <stop offset="0" stop-color="#3b3a37"/><stop offset=".6" stop-color="#1a1a19"/><stop offset="1" stop-color="#0d0d0d"/>
+    </radialGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+  </defs>
+  <!-- body -->
+  <path d="M150 300 L150 900 L850 900 L850 300 Z" fill="url(#body)"/>
+  <path d="M150 300 L150 900 L850 900 L850 300 Z" fill="url(#ribs)"/>
+  <!-- rim -->
+  <ellipse cx="500" cy="300" rx="350" ry="78" fill="none" stroke="url(#rim)" stroke-width="44"/>
+  <!-- water -->
+  <ellipse cx="500" cy="300" rx="326" ry="62" fill="url(#water)"/>
+  <ellipse cx="430" cy="288" rx="120" ry="12" fill="#F4F2EE" opacity=".06"/>
+  <!-- steam -->
+  <g filter="url(#blur)" fill="#F4F2EE">
+    <path d="M330 280 C290 180 390 120 340 20 C300 -70 380 -150 350 -260 C335 -330 370 -400 390 -480 L430 -480 C410 -400 390 -320 410 -250 C440 -150 360 -70 400 30 C440 130 370 200 400 280 Z" opacity=".11"/>
+    <path d="M520 285 C570 200 490 130 540 40 C580 -40 510 -120 550 -220 C575 -290 545 -360 570 -440 L610 -440 C590 -360 620 -290 595 -210 C560 -110 630 -40 590 50 C550 140 610 220 580 290 Z" opacity=".09"/>
+    <path d="M640 290 C690 220 630 150 680 80 C720 20 680 -50 710 -130 L745 -130 C725 -50 770 10 725 90 C685 160 730 230 690 295 Z" opacity=".08"/>
+  </g>
+</svg>
+</div>
+<main>
+  <h1 class="logo">OFFDAY</h1>
+  <div class="tag">RETURN STRONGER</div>
+  <p>Batch 001 is coming. <br>Join the waitlist for first access.</p>
+  <form id="f" novalidate>
+    <label for="email" class="hp">Email</label>
+    <input id="email" name="email" type="email" autocomplete="email" placeholder="Your email" required>
+    <input class="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button id="b" type="submit">Join the waitlist</button>
+    <p class="msg" id="m" role="status" aria-live="polite"></p>
+  </form>
+</main>
+<script>
+  // Paste your Google Apps Script web app URL between the quotes
+  const SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+  const f = document.getElementById('f'), m = document.getElementById('m'), b = document.getElementById('b');
+  f.addEventListener('submit', async e => {
+    e.preventDefault();
+    const email = f.email.value.trim();
+    if (f.company.value) return;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { m.textContent = 'Enter a full email address.'; return; }
+    b.disabled = true; b.textContent = 'Joining…';
+    const src = new URLSearchParams(location.search).get('src') || 'direct';
+    try {
+      await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: new URLSearchParams({ email, source: src, page: location.href }) });
+      f.innerHTML = '<p class="done">You\u2019re on the list. We\u2019ll email you before Batch 001 opens.</p><a class="follow" href="https://instagram.com/1offday" target="_blank" rel="noopener">Follow @1offday</a>';
+    } catch {
+      m.textContent = 'That didn\u2019t go through. Try again.'; b.disabled = false; b.textContent = 'Join the waitlist';
+    }
+  });
+</script>
+</body>
+</html>
